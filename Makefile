@@ -19,5 +19,8 @@ curl-server:
 curl-nginx:
 	curl http://localhost:8080/serv #widok zdefiniowany w nginx.conf
 
+curl-nginx-dir:
+	curl http://localhost:8080/a/b/c/ #statyczne pliki obslugiwane przez nginx
+
 curl-nginx-lb:
 	curl http://localhost:8080/lb/info #proxy obslugiwane przez nginx z load balancingiem

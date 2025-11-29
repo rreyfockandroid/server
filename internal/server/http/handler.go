@@ -2,6 +2,7 @@ package http
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"server/internal/config"
 	"strconv"
@@ -12,15 +13,31 @@ var handlers = []string{
 	"/health",
 	"/",
 	"/info",
+	"/generate",
 }
 
 var handlersMap = map[string]func(w http.ResponseWriter, r *http.Request){
 	handlers[0]: healtHanlder,
 	handlers[1]: rootHandler,
 	handlers[2]: infoHander,
+	handlers[3]: generateDataHandler,
+}
+
+func generateDataHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println("Generate Data Handler called ", r.Header.Get("Server-Name"))
+
+	buffer := strings.Builder{}
+	for i := range 1000 {
+		buffer.WriteString(strconv.Itoa(i))
+		buffer.WriteString(" some generated data line ")
+		buffer.WriteString("\n")
+	}
+	w.Write([]byte(buffer.String()))
 }
 
 func infoHander(w http.ResponseWriter, r *http.Request) {
+	log.Println("Info Handler called ", r.Header.Get("Server-Name"))
+
 	// for key, values := range r.Header {
 	// 	log.Printf("	'%s': %s\n", key, strings.Join(values, ", "))
 	// }
@@ -40,11 +57,15 @@ func infoHander(w http.ResponseWriter, r *http.Request) {
 }
 
 func healtHanlder(w http.ResponseWriter, r *http.Request) {
+	log.Println("Health Handler called ", r.Header.Get("Server-Name"))
+
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("OK"))
 }
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println("Root Handler called ", r.Header.Get("Server-Name"))
+
 	buff := strings.Builder{}
 	for _, path := range handlers {
 		buff.WriteString(path)
