@@ -1,2 +1,3 @@
 venv/
 services/nginx/storage/certs/
+services/nginx/storage/cache/

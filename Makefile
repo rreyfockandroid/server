@@ -16,6 +16,9 @@ docker-nginx-down:
 
 docker-nginx-restart: docker-nginx-down docker-nginx-up
 
+docker-nginx-log:
+	docker logs nginx_server
+
 curl-server:
 	curl http://localhost:8070/info
 
@@ -36,7 +39,10 @@ ca-gen-py:
 		-subj "/C=PL/ST=pomorskie/L=gdansk/O=home/CN=server.py.pl CA" \
 		-out ./services/nginx/storage/certs/rootCA.crt
 
-cert-gen-py:
+mkdir-private:
+	mkdir -p services/storage/certs/private
+
+cert-gen-py: mkdir-private
 	openssl genrsa -out ./services/nginx/storage/certs/private/nginx-selfsigned.key 2048
 
 	openssl req -new \
@@ -63,7 +69,7 @@ ca-gen-go:
 		-subj "/C=PL/ST=pomorskie/L=gdansk/O=home/CN=server.go.pl CA" \
 		-out ./services/nginx/storage/certs/rootCA_go.crt
 
-cert-gen-go:
+cert-gen-go: mkdir-private
 	openssl genrsa -out ./services/nginx/storage/certs/private/nginx-go-selfsigned.key 2048
 
 	openssl req -new \
@@ -78,11 +84,11 @@ cert-gen-go:
 		-CA ./services/nginx/storage/certs/rootCA_go.crt \
 		-CAkey ./services/nginx/storage/certs/rootCA_go.key \
 		-CAcreateserial \
-		-out ./services/nginx/storage/certs/nginx-selfsigned.crt \
+		-out ./services/nginx/storage/certs/nginx-go-selfsigned.crt \
 		-days 365 -sha256 \
 		-extfile ./services/nginx/storage/certs/server_go.ext
 
-cert-dh:
+cert-gen-dh:
 	sudo openssl dhparam -out ./services/nginx/storage/certs/dhparam.pem 2048
 
 domains-add:
