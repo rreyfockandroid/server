@@ -6,17 +6,36 @@
 </head>
 <body>
   <h1>Działa! 🚀</h1>
+
+  <h2>Nginx</h2>
   <ul>
-    <li><a href="http://localhost:8080/a/b/c/">Nginx - Statyczne pliki w katalogu a/b/c/</a></li>
-    <li><a href="http://localhost:8080/a/b/c/page.html">Nginx - Statyczne pliki w katalogu a/b/c/page.html</a></li>
-    <li><a href="http://localhost:8070/info">server info</a></li>
+    <li><a href="http://localhost:80/a/b/c/">Nginx - Statyczne pliki w katalogu a/b/c/</a></li>
+    <li><a href="http://localhost:80/a/b/c/page.html">Nginx - Statyczne pliki w katalogu a/b/c/page.html</a></li>
+    <li><a href="http://localhost:80/a/b/list.html">Nginx - Statyczne pliki w kat1alogu a/b/list.html</a></li>
+  </ul>
+  
+  <h2>Nginx + golang</h2>
+  <ul>
     <li><a href="http://localhost:8080/lb/info">Nginx - load balanced server info</a></li>
-    <li><a href="http://localhost:8070/info">info</a></li>
     <li><a href="http://localhost:8080/serv">Nginx - serv</a></li>
-    <li><a href="http://localhost:8080/a/b/list.html">Nginx - Statyczne pliki w kat1alogu a/b/list.html</a></li>
-    <li><a href="http://localhost:8070/generate">generate</a></li>
     <li><a href="http://localhost:8080/gen">Nginx - generate</a></li>
-    <li><a href="http://localhost:8080/lb/gen">Nginx - lb generate</a></li>
+    <li><a href="http://localhost:8080/lb/generate">Nginx - lb generate</a></li>
+    <li><a href="http://localhost:8080/cache/lb/generate">Nginx - cached lb generate</a></li>
+    <li><a href="http://localhost:8080/cache/lb/generate?fail=1">Nginx - server return 500 - no cached</a></li>
+  </ul>
+
+  <h2>golang</h2>
+  <ul>
+    <li><a href="http://localhost:8070/info">server info</a></li>
+    <li><a href="http://localhost:8070/info">info</a></li>
+    <li><a href="http://localhost:8070/generate">generate</a></li>
+  </ul>
+
+  <h2>Python</h2>
+  <ul>
+    <li><a href="http://localhost:8060/">root</a></li>
+    <li><a href="http://localhost:8060/info">info</a></li>
+    <li><a href="http://localhost:8060/hello/Waclaw">say hello</a></li>
   </ul>
 </body>
 </html>

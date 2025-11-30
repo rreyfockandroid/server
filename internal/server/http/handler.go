@@ -24,23 +24,30 @@ var handlersMap = map[string]func(w http.ResponseWriter, r *http.Request){
 }
 
 func generateDataHandler(w http.ResponseWriter, r *http.Request) {
-	log.Println("Generate Data Handler called ", r.Header.Get("Server-Name"))
+	log.Println(strconv.Itoa(config.Cfg().ConfigFlags.Port), " generate Data Handler called ", r.Header.Get("Server-Name"))
+
+	fail := r.URL.Query().Get("fail")
+	if fail != "" {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("Simulated failure as requested\n"))
+		return
+	}
 
 	buffer := strings.Builder{}
+	buffer.WriteString(strconv.Itoa(config.Cfg().ConfigFlags.Port))
+	buffer.WriteString("\n")
+
 	for i := range 1000 {
 		buffer.WriteString(strconv.Itoa(i))
 		buffer.WriteString(" some generated data line ")
 		buffer.WriteString("\n")
 	}
+
 	w.Write([]byte(buffer.String()))
 }
 
 func infoHander(w http.ResponseWriter, r *http.Request) {
 	log.Println("Info Handler called ", r.Header.Get("Server-Name"))
-
-	// for key, values := range r.Header {
-	// 	log.Printf("	'%s': %s\n", key, strings.Join(values, ", "))
-	// }
 
 	port := config.Cfg().ConfigFlags.Port
 	buffer := strings.Builder{}
