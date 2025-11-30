@@ -12,7 +12,7 @@ services:
       - ./storage/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./storage/cache:/var/cache/nginx:rw
       - ./storage/sites-available:/etc/nginx/sites-enabled:ro
-      - ./storage/certs:/etc/nginx/certs:ro
-
-      
+      - ./storage/certs:/etc/nginx/certs:ro    
     restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
