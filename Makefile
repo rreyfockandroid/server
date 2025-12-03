@@ -31,6 +31,9 @@ curl-nginx-dir:
 curl-nginx-lb:
 	curl http://localhost:8080/lb/info #proxy obslugiwane przez nginx z load balancingiem
 
+curl-pserver:
+	curl localhost:8060/info -H "X-Profile: 1" -v
+
 ca-gen-py:
 	openssl genrsa -out ./services/nginx/storage/certs/rootCA.key 4096
 	openssl req -x509 -new -nodes \

@@ -10,6 +10,7 @@ var once sync.Once
 
 type Config struct {
 	ConfigFlags ConfigFlags
+	PprofPort   int
 }
 
 type ConfigFlags struct {
@@ -19,6 +20,7 @@ type ConfigFlags struct {
 func Cfg() Config {
 	once.Do(func() {
 		conf = Config{
+			PprofPort:   6060,
 			ConfigFlags: configFlags(),
 		}
 	})

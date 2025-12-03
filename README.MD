@@ -15,3 +15,5 @@ kcachegrind profile.callgrind
 zmiana 
 pip install pyprof2calltree
 pyprof2calltree -i last_request.pstat -o output.callgrind
+
+yappi wpiete w server albo jako wrapper na funkcje albo jako interceptor flaska
